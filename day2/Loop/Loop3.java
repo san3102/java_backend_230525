@@ -16,59 +16,15 @@ public class Loop3 {
             }
         }
 
-        int y = 3;
-        String star = "*";
+        int y = 7;
+        int count = 1;
 
-        for(int i = 0; i < y; i++){
-            for(int j = 1; j < y; j++) {
-                if (j % 2 != 0) {
-                    star = star + "*";
-                }
-            }
-            System.out.println(star);
+        for(int i = 0; i < y; i++) {
+            for(int j = 0; j < count; j++){
+               System.out.printf("*");
+           }
+            count += 2;
+           System.out.println("");
         }
-        // 주석추가
-
-        // 출력
-
-        /*
-
-
-         *
-         ***
-         *****
-
-
-         */
-
-        y = 5;
-        // 출력
-        /*
-
-
-         *
-         ***
-         *****
-         *******
-         *********
-
-
-         */
-
-        y = 7;
-        // 출력
-        /*
-
-
-         *
-         ***
-         *****
-         *******
-         *********
-         ***********
-         *************
-
-
-         */
     }
 }

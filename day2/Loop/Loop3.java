@@ -27,6 +27,7 @@ public class Loop3 {
             }
             System.out.println(star);
         }
+        // 주석추가
 
         // 출력
 

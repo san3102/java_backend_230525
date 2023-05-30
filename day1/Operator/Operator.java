@@ -1,4 +1,4 @@
-package day1.Condition.Operator;
+package day1.Operator;
 
 public class Operator {
 

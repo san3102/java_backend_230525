@@ -17,6 +17,5 @@ public class Function1 {
         // 함수 : 동일한 코드를 재사용
         test();
         System.out.println(add(3, 5));
-
     }
 }

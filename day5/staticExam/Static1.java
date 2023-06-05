@@ -1,4 +1,4 @@
-package day5;
+package day5.staticExam;
 
 public class Static1 {
     public static void main(String[] args) {

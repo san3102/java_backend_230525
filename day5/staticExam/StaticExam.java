@@ -1,4 +1,4 @@
-package day5;
+package day5.staticExam;
 
 public class StaticExam {
     static int num = 10;

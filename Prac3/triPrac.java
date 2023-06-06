@@ -21,6 +21,8 @@ public class triPrac {
         System.out.println();
 
         triangle(10);
+        System.out.println();
+        reverseTriangle(10);
     }
     public static void triangle(int height){
         for(int i = 0; i < height; i++){
@@ -28,6 +30,14 @@ public class triPrac {
                 System.out.printf(" ");
             }
             for(int k = 0; k <= i; k++){
+                System.out.printf("*");
+            }
+            System.out.println();
+        }
+    }
+    public static void reverseTriangle(int height){
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j <= i; j++){
                 System.out.printf("*");
             }
             System.out.println();

@@ -26,6 +26,7 @@ public class PracHard2 {
         bank1.addAccount(user1);
         bank1.addAccount(user2);
         bank1.addAccount(user3);
+        bank1.addAccount(user4);
         bank1.printAccountList();
 
         bank1.depositToAccount("33-412-58", 5000);

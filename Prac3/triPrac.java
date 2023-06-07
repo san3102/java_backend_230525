@@ -23,6 +23,10 @@ public class triPrac {
         triangle(10);
         System.out.println();
         reverseTriangle(10);
+        System.out.println();
+        triangle2(10);
+        System.out.println();
+        reverseTriangle2(10);
     }
     public static void triangle(int height){
         for(int i = 0; i < height; i++){
@@ -38,6 +42,25 @@ public class triPrac {
     public static void reverseTriangle(int height){
         for(int i = 0; i < height; i++){
             for(int j = 0; j <= i; j++){
+                System.out.printf("*");
+            }
+            System.out.println();
+        }
+    }
+    public static void triangle2(int height){
+        for(int i = 0; i < height; i++){
+            for(int j = height; j > i; j--){
+                System.out.printf("*");
+            }
+            System.out.println();
+        }
+    }
+    public static void reverseTriangle2(int height){
+        for(int i = 0; i < height; i++){
+            for(int j = 0; j < i; j++){
+                System.out.printf(" ");
+            }
+            for(int k = 0; k < height - i; k++){
                 System.out.printf("*");
             }
             System.out.println();

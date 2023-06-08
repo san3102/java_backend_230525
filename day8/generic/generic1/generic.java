@@ -1,7 +1,15 @@
-package day8.generic1;
+package day8.generic.generic1;
 
 public class generic {
     public static void main(String[] args) {
+
+//        사람 a사람 = new 사람();
+//        int i = 10;
+//        Object o = a사람;
+//        o = i;  // 10이 그냥 들어가는게 아니고 객체화 되서 들어간다.
+//        Integer io = Integer.valueOf(10);        // int의 래퍼 클래스
+//        Double o2 = Double.valueOf(1.5);         // double의 래퍼 클래스
+//        o = io; // o에 i 를 직접 넣는 것이 아닌 Integer로 바꿔서 넣는게 맞다.
 
         저장소.저장(10);
         저장소.저장("안녕");
@@ -42,13 +50,14 @@ class 저장소{
         System.out.println(data + " 작동확인");
     }
 }
-class 사람{
+class 사람 {
     public String toString(){
         return "사람클래스";
     }
 }
-class 사과{
+class 사과 {
     public String toString(){
         return "사과클래스";
     }
 }
+

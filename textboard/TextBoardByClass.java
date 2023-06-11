@@ -1,7 +1,6 @@
 package textboard;
 // 게시판 > 게시물 번호, 이름, 내용   > 리스트화
 //        > 기능 : 추가, 삭제, 조회, 수정, 종료
-import javax.xml.stream.events.Comment;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -108,6 +107,7 @@ class Tester implements PostOperation{
     public Tester(List<PostListDev> postListArray){
         this.postListArray = postListArray;
     }
+    @Override
     public void execute(){
         PostListDev postlistTest1 = new PostListDev();
         PostListDev postlistTest2 = new PostListDev();
@@ -243,8 +243,16 @@ class PostDeleter implements PostOperation {
     @Override
     public void execute() {
         System.out.print("삭제할 게시물 번호: ");
-        int postNum = scanner.nextInt();
-        scanner.nextLine();
+        String inputData = scanner.nextLine();
+        int postNum;
+        try {
+            postNum = Integer.parseInt(inputData);
+        }catch (NumberFormatException e){
+            System.out.println("게시물 번호는 숫자로만 입력해주세요.");
+            execute();
+            return;
+        }
+
         boolean found = false;
 
         Iterator<PostListDev> iterator = postListArray.iterator();
@@ -269,6 +277,7 @@ class Helper implements PostOperation{
         System.out.println("-----------------------------");
         System.out.println("add : 게시물 추가");
         System.out.println("list : 게시물 목록");
+        System.out.println("search : 게시물 제목 검색");
         System.out.println("detail : 게시물 상세보기");
         System.out.println("update : 게시물 수정");
         System.out.println("delete : 게시물 삭제");
@@ -286,32 +295,24 @@ class PostDetail implements PostOperation{
     @Override
     public void execute(){
         System.out.printf("상세보기 할 게시물 번호를 입력해주세요 : ");
-        int postNum = scanner.nextInt();
-        scanner.nextLine();
+
+        String inputData = scanner.nextLine();
+        int postNum;
+
+        try {
+            postNum = Integer.parseInt(inputData);
+        }catch (NumberFormatException e){
+            System.out.println("게시물 번호는 숫자로만 입력해주세요.");
+            execute();
+            return;
+        }
+
         boolean found = false;
 
         for(PostListDev data : postListArray){
             if(data.getPostNumber() == postNum){
 
-                System.out.println("===============================");
-                System.out.println("번호 : " + data.getPostNumber());
-                System.out.println("제목 : " + data.getTitle());
-                System.out.println("내용 : " + data.getBody());
-                System.out.println("등록 날짜 : " + data.getPutUpDate());
-                data.setPostView(data.getPostView() + 1);
-                System.out.println("조회 수 : " + data.getPostView());
-                System.out.println("===============================");
-
-                if(!(data.getPostCommentList().isEmpty())){
-                    System.out.println("============== 댓글 =============");
-                    ArrayList<String> commentList = data.getPostCommentList();
-                    for(int index = 0; index < commentList.size(); index+=2){
-                        System.out.println("댓글 내용 : " + commentList.get(index));
-                        System.out.println("댓글 작성일 : " + commentList.get(index+1));
-                        System.out.println("===============================");
-                    }
-                }
-                handlePostDetailOperations(data);
+                postDetailView(data);
 
                 found = true;
                 break;
@@ -321,12 +322,41 @@ class PostDetail implements PostOperation{
             System.out.println("해당 게시물 번호가 존재하지 않습니다.");
         }
     }
+    private void postDetailView(PostListDev data){
+        System.out.println("===============================");
+        System.out.println("번호 : " + data.getPostNumber());
+        System.out.println("제목 : " + data.getTitle());
+        System.out.println("내용 : " + data.getBody());
+        System.out.println("등록 날짜 : " + data.getPutUpDate());
+        data.setPostView(data.getPostView() + 1);
+        System.out.println("댓글 수 : " + data.getPostCommentList().size() / 2);
+        System.out.println("조회 수 : " + data.getPostView());
+        System.out.println("===============================");
+
+        if(!(data.getPostCommentList().isEmpty())){
+            System.out.println("============== 댓글 =============");
+            ArrayList<String> commentList = data.getPostCommentList();
+            for(int index = 0; index < commentList.size(); index+=2){
+                System.out.println("댓글 내용 : " + commentList.get(index));
+                System.out.println("댓글 작성일 : " + commentList.get(index+1));
+                System.out.println("===============================");
+            }
+        }
+        handlePostDetailOperations(data);
+    }
     private void handlePostDetailOperations(PostListDev data){
-        Scanner scanner1 = new Scanner(System.in);
-        System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 목록으로) : ");
+        System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 상세정보 다시보기, 0. 목록으로) : ");
         // addComment, recommend, updatePost, deletePost, return
-        int choice = scanner1.nextInt();
-        scanner1.nextLine();
+        String inputData = scanner.nextLine();
+        int choice;
+
+        try {
+            choice = Integer.parseInt(inputData);
+        }catch (NumberFormatException e){
+            System.out.println("숫자로만 입력해주세요.");
+            handlePostDetailOperations(data);
+            return;
+        }
         switch (choice){
             case 1:
                 addComment(data);
@@ -345,6 +375,9 @@ class PostDetail implements PostOperation{
                 handlePostDetailOperations(data);
                 break;
             case 5:
+                postDetailView(data);
+                break;
+            case 0:
                 System.out.println("상세보기 화면을 빠져나갑니다.");
                 break;
             default:

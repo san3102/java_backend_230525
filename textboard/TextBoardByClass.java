@@ -71,12 +71,12 @@ class PostListDev{
     public PostListDev(){
         this.postCommentList = new ArrayList<>();
     }
-    public PostListDev(int postNumber, String title, String body){
-        this.postNumber = postNumber;
-        this.title = title;
-        this.body = body;
-        this.postCommentList = new ArrayList<>();
-    }
+//    public PostListDev(int postNumber, String title, String body){
+//        this.postNumber = postNumber;
+//        this.title = title;
+//        this.body = body;
+//        this.postCommentList = new ArrayList<>();
+//    }
     public void setPostNumber(int postNumber){this.postNumber = postNumber;}
     public void setTitle(String title){this.title = title;}
     public void setBody(String body){this.body = body;}
@@ -84,9 +84,9 @@ class PostListDev{
     public void setPostView(int postView){this.postView = postView;}
 //    public void setPostComment(String postComment){this.postComment = postComment;}
 //    public void setPostCommentDate(String postCommentDate){this.postCommentDate = postCommentDate;}
-    public void setPostCommentList(ArrayList<String> postCommentList){
-        this.postCommentList = postCommentList;
-    }
+//    public void setPostCommentList(ArrayList<String> postCommentList){
+//        this.postCommentList = postCommentList;
+//    }
     public int getPostNumber(){return this.postNumber;}
     public String getTitle(){return this.title;}
     public String getBody(){return this.body;}
@@ -150,7 +150,7 @@ class PostAdder implements PostOperation {
         this.id = id;
         this.postListArray = postListArray;
     }
-
+    @Override
     public void execute() {
         System.out.printf("게시물 제목을 입력해주세요: ");
         String title = scanner.nextLine();
@@ -256,10 +256,13 @@ class PostDeleter implements PostOperation {
         boolean found = false;
 
         Iterator<PostListDev> iterator = postListArray.iterator();
+
         while (iterator.hasNext()){
             PostListDev data = iterator.next();
+
             if(data.getPostNumber() == postNum){
                 iterator.remove();
+                data.getPostCommentList().clear();
                 System.out.println("게시물이 삭제되었습니다.");
                 found = true;
                 break;
@@ -345,7 +348,7 @@ class PostDetail implements PostOperation{
         handlePostDetailOperations(data);
     }
     private void handlePostDetailOperations(PostListDev data){
-        System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 상세정보 다시보기, 0. 목록으로) : ");
+        System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 상세정보 다시보기, 0. 처음 화면으로) : ");
         // addComment, recommend, updatePost, deletePost, return
         String inputData = scanner.nextLine();
         int choice;
@@ -417,7 +420,7 @@ class PostSearcher implements PostOperation{
         this.postListArray = postListArray;
         this.scanner = scanner;
     }
-
+    @Override
     public void execute(){
         System.out.printf("검색 키워드를 입력해주세요 (대소문자 구분) : ");
         String postTitle = scanner.nextLine();

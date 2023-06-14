@@ -14,6 +14,10 @@ public class Article {
     public Article(){
         this.postCommentList = new ArrayList<>();
     }
+    public Article(String title, String body){
+        this.title = title;
+        this.body = body;
+    }
     public Article(int id, String title, String body, String putUpDate){
         this.id = id;
         this.title = title;

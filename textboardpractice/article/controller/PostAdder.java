@@ -14,14 +14,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PostAdder implements postoperation {
-    private Scanner scanner;
-    private List<Article> articleList;
     private ArticleRepository articleRepository;
 
-    public PostAdder(Scanner scanner, List<Article> articleList) {
-        this.scanner = scanner;
-        this.articleList = articleList;
-        this.articleRepository = new ArticleRepository();
+    public PostAdder(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
     }
 
     @Override
@@ -29,24 +25,13 @@ public class PostAdder implements postoperation {
         AddView addView = new AddView();
         addView.render();
 
-        HashMap<String, Object> inputData = addView.getInputData();
+        HashMap<String, Object> inputData = addView.inputData;
         String title =(String) inputData.get("title");
         String body = (String) inputData.get("body");
 
-
-//        Article postList = new Article();
-//        String currentTime = Util.currentTime();
-
         articleRepository.add(title, body);
 
-//        postList.setTitle(title);
-//        postList.setBody(body);
-//        postList.setPostNumber(id);
-//        postList.setPutUpDate(currentTime);
-//        postList.setPostView(0);
         System.out.println("게시물이 추가되었습니다.");
-//        articleList.add(postList);
-
     }
 }
 //    public View getResultView() {

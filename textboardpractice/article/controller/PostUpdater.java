@@ -1,6 +1,7 @@
 package textboardpractice.article.controller;
 
 import textboardpractice.article.entity.Article;
+import textboardpractice.article.entity.ArticleRepository;
 
 import java.util.List;
 import java.util.Scanner;
@@ -8,10 +9,11 @@ import java.util.Scanner;
 public class PostUpdater implements postoperation {
     private Scanner scanner;
     private List<Article> articleList;
+    private ArticleRepository articleRepository;
 
-    public PostUpdater(Scanner scanner, List<Article> articleList) {
+    public PostUpdater(Scanner scanner, ArticleRepository articleRepository) {
         this.scanner = scanner;
-        this.articleList = articleList;
+        this.articleRepository = articleRepository;
     }
 
     @Override

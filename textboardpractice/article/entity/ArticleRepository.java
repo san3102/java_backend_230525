@@ -43,5 +43,13 @@ public class ArticleRepository {
         return articleList;
     }
 
+    public void update(int id, String newTitle, String newBody){
+        for(Article data : articleList){
+            if(id == data.getId()){
+                data.setTitle(newTitle);
+                data.setBody(newBody);
+            }
+        }
+    }
 }
 

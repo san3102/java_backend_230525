@@ -24,7 +24,6 @@ public class Article {
         this.body = body;
         this.putUpDate = putUpDate;
     }
-    public void setPostNumber(int postNumber){this.postNumber = postNumber;}
     public void setTitle(String title){this.title = title;}
     public void setBody(String body){this.body = body;}
     public void setPutUpDate(String putUpDate){this.putUpDate = putUpDate;}

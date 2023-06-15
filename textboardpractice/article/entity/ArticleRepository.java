@@ -3,6 +3,8 @@ package textboardpractice.article.entity;
 import textboardpractice.article.util.Util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class ArticleRepository {
@@ -35,7 +37,8 @@ public class ArticleRepository {
         articleList.add(articleList3);
     }
     public void add(String title, String body){
-        Article article = new Article(id, title, body, Util.currentTime());
+        Article article = new Article(title, body, Util.currentTime());
+        article.setId(id);
         articleList.add(article);
         id++;
     }
@@ -50,6 +53,37 @@ public class ArticleRepository {
                 data.setBody(newBody);
             }
         }
+    }
+
+    public void delete(int id){
+        Iterator<Article> iterator = articleList.listIterator();
+        while (iterator.hasNext()){
+            Article data = iterator.next();
+            if(data.getId() == id){
+                iterator.remove();
+                break;
+            }
+        }
+    }
+
+    public List<Article> search(String title){
+        List<Article> emptyList = new ArrayList<>();
+        for(Article data : articleList){
+            if(data.getTitle().contains(title)){
+                return articleList;
+            }
+        }
+        return emptyList;
+    }
+
+    public List<Article> detail(int id){
+        List<Article> resultList = new ArrayList<>();
+        for(Article data : articleList){
+            if(data.getId() == id){
+                resultList.add(data);
+            }
+        }
+        return resultList;
     }
 }
 

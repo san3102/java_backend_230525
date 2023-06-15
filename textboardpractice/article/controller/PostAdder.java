@@ -15,15 +15,19 @@ import java.util.Scanner;
 
 public class PostAdder implements postoperation {
     private ArticleRepository articleRepository;
+    private ViewManager viewManager;
 
     public PostAdder(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
+        this.viewManager = new ViewManager();
     }
 
     @Override
     public void execute() {
         AddView addView = new AddView();
-        addView.render();
+//        viewManager.handleView(addView);
+
+        addView.addScreen();
 
         HashMap<String, Object> inputData = addView.inputData;
         String title =(String) inputData.get("title");
@@ -31,7 +35,7 @@ public class PostAdder implements postoperation {
 
         articleRepository.add(title, body);
 
-        System.out.println("게시물이 추가되었습니다.");
+//        System.out.println("게시물이 추가되었습니다.");
     }
 }
 //    public View getResultView() {

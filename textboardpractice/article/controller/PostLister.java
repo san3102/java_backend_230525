@@ -19,6 +19,7 @@ public class PostLister implements postoperation {
     @Override
     public void execute() {
         ListView listView = new ListView(articleRepository.getArticleList());
-        viewManager.handleView(listView);
+//        viewManager.handleView(listView);
+        listView.listScreen();
     }
 }

@@ -18,8 +18,7 @@ public class Article {
         this.title = title;
         this.body = body;
     }
-    public Article(int id, String title, String body, String putUpDate){
-        this.id = id;
+    public Article(String title, String body, String putUpDate){
         this.title = title;
         this.body = body;
         this.putUpDate = putUpDate;

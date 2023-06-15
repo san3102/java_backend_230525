@@ -9,6 +9,12 @@ public class UpdateView implements View{
     public int id;
     @Override
     public void render(){
+        System.out.println("수정이 완료되었습니다.");
+
+        System.out.println("화면을 넘기려면 Enter를 입력해주세요.");
+        scanner.nextLine();
+    }
+    public void updateScreen(){
         for(int i = 0; i < 30; i++){
             System.out.println();
         }

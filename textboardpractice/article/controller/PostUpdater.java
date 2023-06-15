@@ -3,6 +3,7 @@ package textboardpractice.article.controller;
 import textboardpractice.article.entity.Article;
 import textboardpractice.article.entity.ArticleRepository;
 import textboardpractice.article.view.UpdateView;
+import textboardpractice.article.view.ViewManager;
 
 import java.util.List;
 import java.util.Scanner;
@@ -11,25 +12,20 @@ public class PostUpdater implements postoperation {
     private Scanner scanner;
     private List<Article> articleList;
     private ArticleRepository articleRepository;
-    private String newTitle;
-    private String newBody;
-    private int id;
-
+    private ViewManager viewManager;
     public PostUpdater(Scanner scanner, ArticleRepository articleRepository) {
         this.scanner = scanner;
         this.articleRepository = articleRepository;
+        this.viewManager = new ViewManager();
     }
 
     @Override
     public void execute() {
         UpdateView updateView = new UpdateView();
-        updateView.render();
+//        viewManager.handleView(updateView);
 
-        id = updateView.id;
-        newTitle = updateView.inputNewTitle;
-        newBody = updateView.inputNewBody;
-
-        articleRepository.update(id, newTitle, newBody);
+        updateView.updateScreen();
+        articleRepository.update(updateView.id, updateView.inputNewTitle, updateView.inputNewBody);
 //        System.out.printf("수정할 게시물 번호 : ");
 //        int id = scanner.nextInt();
 //        scanner.nextLine();
